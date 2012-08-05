@@ -9,5 +9,6 @@
   },
   "devDependencies": {
   	"nae": "latest"
-  }
+  },
+  "customHost": [ "www.mynah.org" ]
 }
