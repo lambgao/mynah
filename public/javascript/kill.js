@@ -1,4 +1,5 @@
-$.kill = function(src, width, height, num, top, distance) {
+$.kill = function(src, width, height, top, distance, browsers) {
+  var num = browsers.length;
   var dw = width / num;
   height = height / 2;
   distance = distance / 2;
@@ -26,8 +27,9 @@ $.kill = function(src, width, height, num, top, distance) {
       for ( var m = 0; m < num; m++) {
         var l = left * (m + 1) + dw * m;
         var t = top - distance + i * (height + 2 * distance);
+        var id = m + (i * num);
         $('<div></div>', {
-          id : 'adb' + (m + (i * num)),
+          id : 'adb' + id,
           width : dw,
           height : height,
           css : {
@@ -45,6 +47,20 @@ $.kill = function(src, width, height, num, top, distance) {
         }, 'slow');
         $l.push(l);
         $t.push(t);
+        if (i != 0) {
+          $('<a/>', {
+            id : 'browser' + id,
+            href : browsers[m].url,
+            title : browsers[m].title,
+            target : '_blank',
+            width : dw,
+            height : height,
+            css : {
+              position : 'absolute',
+              display : 'block'
+            }
+          }).appendTo($('#adb' + id));
+        }
       }
     }
   }).click(function() {
@@ -59,5 +75,5 @@ $.kill = function(src, width, height, num, top, distance) {
       });
     }
     $(this).remove();
-  })
+  });
 }

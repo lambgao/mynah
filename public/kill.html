@@ -11,12 +11,21 @@
 	<div style="height: 600px; background: #000;">
 	</div>
 	<script type="text/javascript">
-	$(function(){
-		$.kill('image/kill.jpg',640,284,4,150,200);
-	})
-	</script>
+	var browsers=[
+	         		{title:'Chrome',url:'http://www.google.com/chrome/?hl=zh-CN'},
+	         		{title:'Mozilla Firefox ',url:'http://www.mozillaonline.com/'},
+	         		{title:'Opera',url:'http://www.opera.com/'},
+	         		{title:'Safari',url:'http://www.apple.com.cn/safari/'}
+	         	];
+	
+    $(function() {
+      if ($.browser.msie && parseInt($.browser.version, 10) < 9) {  
+        $.kill('image/kill.jpg', 640, 284, 150, 200, browsers);
+      }
+    });
+  </script>
 	<div style="height: 600px; background: #ccc; color: #000">
-		<a href="javascript:void(0)" onclick="$.kill('image/kill.jpg',640,284,16,150,200)">测试浏览器滚动，滚动到文档底部然后点击测试</a></div>
+		<a href="javascript:void(0)" onclick="$.kill('image/kill.jpg',640,284,150,200,browsers)">测试浏览器滚动，滚动到文档底部然后点击测试</a></div>
 </div>
 
 </body>
