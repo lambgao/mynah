@@ -1,101 +1,94 @@
-var clickX_simple = new Array();
-var clickY_simple = new Array();
-var clickDrag_simple = new Array();
-var paint_simple;
-var canvas_simple;
-var context_simple;
+var clickX = new Array();
+var clickY = new Array();
+var clickDrag = new Array();
+var paint;
+var canvas;
+var context;
 var canvasWidth = 800;
 var canvasHeight = 400;
-prepareSimpleCanvas();
+prepareCanvas();
 /**
 * Creates a canvas element.
 */
-function prepareSimpleCanvas()
+function prepareCanvas()
 {
-  // Create the canvas (Neccessary for IE because it doesn't know what a canvas element is)
-  var canvasDiv = document.getElementById('canvasSimpleDiv');
-  canvas_simple = document.createElement('canvas');
-  canvas_simple.setAttribute('width', canvasWidth);
-  canvas_simple.setAttribute('height', canvasHeight);
-  canvas_simple.setAttribute('id', 'canvasSimple');
-  canvasDiv.appendChild(canvas_simple);
-  if(typeof G_vmlCanvasManager != 'undefined') {
-    canvas_simple = G_vmlCanvasManager.initElement(canvas_simple);
-  }
-  context_simple = canvas_simple.getContext("2d");
+  canvas =  document.getElementById('canvas');
+  canvas.setAttribute('width', canvasWidth);
+  canvas.setAttribute('height', canvasHeight);
+  context = canvas.getContext("2d");
   
   // Add mouse events
   // ----------------
-  $('#canvasSimple').mousedown(function(e)
+  $('#canvas').mousedown(function(e)
   {
     // Mouse down location
     var mouseX = e.pageX - this.offsetLeft;
     var mouseY = e.pageY - this.offsetTop;
     
-    paint_simple = true;
-    addClickSimple(mouseX, mouseY, false);
-    redrawSimple();
+    paint = true;
+    addClick(mouseX, mouseY, false);
+    redraw();
   });
   
-  $('#canvasSimple').mousemove(function(e){
-    if(paint_simple){
-      addClickSimple(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
-      redrawSimple();
+  $('#canvas').mousemove(function(e){
+    if(paint){
+      addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+      redraw();
     }
   });
   
-  $('#canvasSimple').mouseup(function(e){
-    paint_simple = false;
-      redrawSimple();
+  $('#canvas').mouseup(function(e){
+    paint = false;
+      redraw();
   });
   
-  $('#canvasSimple').mouseleave(function(e){
-    paint_simple = false;
+  $('#canvas').mouseleave(function(e){
+    paint = false;
   });
   
-  $('#clearCanvasSimple').mousedown(function(e)
+  $('#clearCanvas').mousedown(function(e)
   {
-    clickX_simple = new Array();
-    clickY_simple = new Array();
-    clickDrag_simple = new Array();
-    clearCanvas_simple(); 
+    clickX = new Array();
+    clickY = new Array();
+    clickDrag = new Array();
+    clearCanvas(); 
   });
 }
 
-function addClickSimple(x, y, dragging)
+function addClick(x, y, dragging)
 {
-  clickX_simple.push(x);
-  clickY_simple.push(y);
-  clickDrag_simple.push(dragging);
+  clickX.push(x);
+  clickY.push(y);
+  clickDrag.push(dragging);
 }
 
-function clearCanvas_simple()
+function clearCanvas()
 {
-  context_simple.fillStyle = '#ffffff'; // Work around for Chrome
-  context_simple.fillRect(0, 0, canvasWidth, canvasHeight); // Fill in the canvas with white
-  canvas_simple.width = canvas_simple.width; // clears the canvas 
+  context.fillStyle = '#ffffff'; // Work around for Chrome
+  context.fillRect(0, 0, canvasWidth, canvasHeight); // Fill in the canvas with white
+  canvas.width = canvas.width; // clears the canvas 
 }
 
-function redrawSimple()
+function redraw()
 {
-  clearCanvas_simple();
+  clearCanvas();
   
   var radius = 5;
-  context_simple.strokeStyle = "#000000";
-  context_simple.lineJoin = "round";
-  context_simple.lineWidth = radius;
+  context.strokeStyle = "#000000";
+  context.lineJoin = "round";
+  context.lineWidth = radius;
       
-  for(var i=0; i < clickX_simple.length; i++)
+  for(var i=0; i < clickX.length; i++)
   {   
-    context_simple.beginPath();
-    if(clickDrag_simple[i] && i){
-      context_simple.moveTo(clickX_simple[i-1], clickY_simple[i-1]);
+    context.beginPath();
+    if(clickDrag[i] && i){
+      context.moveTo(clickX[i-1], clickY[i-1]);
     }else{
-      context_simple.moveTo(clickX_simple[i]-1, clickY_simple[i]);
+      context.moveTo(clickX[i]-1, clickY[i]);
     }
-    context_simple.lineTo(clickX_simple[i], clickY_simple[i]);
-    context_simple.closePath();
-    context_simple.stroke();
+    context.lineTo(clickX[i], clickY[i]);
+    context.closePath();
+    context.stroke();
   }
 }
 

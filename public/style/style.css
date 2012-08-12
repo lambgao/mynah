@@ -1,9 +1,4 @@
-#canvasSimpleDiv {
-	width: 800px;
-	height: 400px;
+#canvas{
 	border: sienna dashed;
-}
-
-#canvasSimple {
 	cursor: url('../image/pencil.cur'), crosshair;
 }
