@@ -1,8 +1,9 @@
+var canvasWidth = 800;
+var canvasHeight = 400;
 var CanvasDrawr = function(options) {
   var canvas = document.getElementById(options.id), ctxt = canvas.getContext("2d");
-  canvas.style.width = '100%'
-  canvas.width = canvas.offsetWidth;
-  canvas.style.width = '';
+  canvas.setAttribute('width', canvasWidth);
+  canvas.setAttribute('height', canvasHeight);
   ctxt.lineWidth = options.size || Math.ceil(Math.random() * 35);
   ctxt.lineCap = options.lineCap || "round";
   ctxt.pX = undefined;
@@ -55,7 +56,7 @@ var CanvasDrawr = function(options) {
 };
 $(function() {
   var super_awesome_multitouch_drawing_canvas_thingy = new CanvasDrawr({
-    id : "example",
+    id : "canvas",
     size : 15
   });
 });
