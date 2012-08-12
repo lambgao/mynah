@@ -98,3 +98,5 @@ function redrawSimple()
     context_simple.stroke();
   }
 }
+
+document.onselectstart=function(){return false;}

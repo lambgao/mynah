@@ -2,5 +2,8 @@
 	width: 800px;
 	height: 400px;
 	border: sienna dashed;
-	cursor: pointer;
+}
+
+#canvasSimple {
+	cursor: url(image/pencil.png), crosshair;
 }
