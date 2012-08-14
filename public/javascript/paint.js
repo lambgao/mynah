@@ -55,6 +55,33 @@ function prepareCanvas() {
     clearCanvas();
   };
 
+  var touch = function(e) {
+    var offset = this;
+    e.touches.forEach(function(i, touch) {
+      // Mouse down location
+      var mouseX = e.pageX - offset.offsetLeft;
+      var mouseY = e.pageY - offset.offsetTop;
+
+      paint = true;
+      addClick(mouseX, mouseY, false);
+      redraw();
+    });
+    event.preventDefault();
+  };
+  
+  var move = function(e) {
+    var offset = this;
+    e.touches.forEach(function(i, touch) {
+      // Mouse down location
+      var mouseX = e.pageX - offset.offsetLeft;
+      var mouseY = e.pageY - offset.offsetTop;
+
+      paint = true;
+      addClick(mouseX, mouseY, false);
+      redraw();
+    });
+    event.preventDefault();
+  };
   // Add mouse event listeners to canvas element
   canvas.addEventListener("mousedown", press, false);
   canvas.addEventListener("mousemove", drag, false);
@@ -62,10 +89,10 @@ function prepareCanvas() {
   canvas.addEventListener("mouseout", cancel, false);
 
   // Add touch event listeners to canvas element
-  canvas.addEventListener("touchstart", press, false);
-  canvas.addEventListener("touchmove", drag, false);
-  canvas.addEventListener("touchend", release, false);
-  canvas.addEventListener("touchcancel", cancel, false);
+  canvas.addEventListener("touchstart", touch, false);
+  canvas.addEventListener("touchmove", move, false);
+  //canvas.addEventListener("touchend", release, false);
+  //canvas.addEventListener("touchcancel", cancel, false);
 
   // Add mouse event listeners to canvas element
   clearBtn.addEventListener("click", clear);
@@ -105,6 +132,6 @@ function redraw() {
   }
 }
 
-//document.onselectstart = function() {
-//  return false;
-//}
+// document.onselectstart = function() {
+// return false;
+// }
