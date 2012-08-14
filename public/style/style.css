@@ -1,4 +1,8 @@
-#canvas{
+body {
+	-webkit-user-select: none;
+}
+
+#canvas {
 	border: sienna dashed;
 	cursor: url('../image/pencil.cur'), crosshair;
 }

@@ -66,7 +66,7 @@ function prepareCanvas() {
   canvas.addEventListener("touchmove", drag, false);
   canvas.addEventListener("touchend", release, false);
   canvas.addEventListener("touchcancel", cancel, false);
-  
+
   // Add mouse event listeners to canvas element
   clearBtn.addEventListener("click", clear);
 }
@@ -105,6 +105,6 @@ function redraw() {
   }
 }
 
-document.onselectstart = function() {
-  return false;
-}
+//document.onselectstart = function() {
+//  return false;
+//}
